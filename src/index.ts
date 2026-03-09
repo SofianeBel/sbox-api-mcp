@@ -1,0 +1,42 @@
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
+import { loadApiData } from './data/loader.js'
+import { buildIndexes } from './data/indexer.js'
+import { registerSearchTypes } from './tools/search-types.js'
+import { registerGetType } from './tools/get-type.js'
+import { registerSearchMembers } from './tools/search-members.js'
+import { registerListNamespaces } from './tools/list-namespaces.js'
+import { registerSearchDocs } from './tools/search-docs.js'
+import { registerUpdateSource } from './tools/update-source.js'
+
+async function main() {
+  console.error('[sbox-api] Starting S&box API MCP Server...')
+
+  // Load API data
+  const data = await loadApiData()
+  const indexes = buildIndexes(data)
+
+  // Create MCP server
+  const server = new McpServer({
+    name: 'sbox-api',
+    version: '1.0.0',
+  })
+
+  // Register all tools
+  registerSearchTypes(server, indexes)
+  registerGetType(server, indexes)
+  registerSearchMembers(server, indexes)
+  registerListNamespaces(server, indexes)
+  registerSearchDocs(server, indexes)
+  registerUpdateSource(server, indexes)
+
+  // Connect via stdio
+  const transport = new StdioServerTransport()
+  await server.connect(transport)
+  console.error('[sbox-api] Server running on stdio')
+}
+
+main().catch(err => {
+  console.error('[sbox-api] Fatal error:', err)
+  process.exit(1)
+})
