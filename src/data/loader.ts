@@ -1,14 +1,13 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
-import { join, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { join } from 'node:path'
+import { homedir } from 'node:os'
 import type { SboxApiData, CacheConfig } from '../types.js'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const CACHE_DIR = join(__dirname, '..', '..', 'cache')
+const CACHE_DIR = process.env.SBOX_CACHE_DIR || join(homedir(), '.sbox-api-mcp')
 const CONFIG_PATH = join(CACHE_DIR, 'config.json')
 const DATA_PATH = join(CACHE_DIR, 'api-data.json')
 
-const DEFAULT_URL = 'https://cdn.sbox.game/releases/2026-03-09-03-14-54.zip.json'
+const DEFAULT_URL = process.env.SBOX_API_URL || 'https://cdn.sbox.game/releases/2026-03-09-03-14-54.zip.json'
 
 function ensureCacheDir(): void {
   if (!existsSync(CACHE_DIR)) {
