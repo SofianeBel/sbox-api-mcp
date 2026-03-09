@@ -1,12 +1,37 @@
 {
-  "name": "sbox-mcp-server",
+  "name": "sbox-api-mcp",
   "version": "1.0.0",
-  "description": "MCP server for S&box API documentation lookup",
+  "description": "MCP server for S&box game engine API documentation lookup. Search types, methods, properties, and documentation across the entire S&box API.",
   "type": "module",
+  "bin": {
+    "sbox-api-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    ".claude-plugin",
+    ".mcp.json"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts"
+  },
+  "keywords": [
+    "mcp",
+    "sbox",
+    "sandbox",
+    "game-engine",
+    "api",
+    "documentation",
+    "claude",
+    "claude-code"
+  ],
+  "author": "sofianebel",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sofianebel/sbox-api-mcp.git"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",
