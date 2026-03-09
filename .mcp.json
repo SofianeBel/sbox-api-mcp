@@ -1,0 +1,6 @@
+{
+  "sbox-api": {
+    "command": "npx",
+    "args": ["-y", "sbox-api-mcp"]
+  }
+}
