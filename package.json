@@ -1,7 +1,7 @@
 {
   "name": "sbox-api-mcp",
-  "version": "1.0.0",
-  "description": "MCP server for S&box game engine API documentation lookup. Search types, methods, properties, and documentation across the entire S&box API.",
+  "version": "1.1.0",
+  "description": "MCP server for S&box game engine API documentation and Workshop (UGC) asset search. Search types, methods, properties, documentation, and community-made models, sounds, maps, and more.",
   "type": "module",
   "bin": {
     "sbox-api-mcp": "dist/index.js"
@@ -25,7 +25,11 @@
     "api",
     "documentation",
     "claude",
-    "claude-code"
+    "claude-code",
+    "ugc",
+    "workshop",
+    "assets",
+    "models"
   ],
   "author": "sofianebel",
   "license": "MIT",
