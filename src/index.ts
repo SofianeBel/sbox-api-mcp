@@ -9,6 +9,8 @@ import { registerSearchMembers } from './tools/search-members.js'
 import { registerListNamespaces } from './tools/list-namespaces.js'
 import { registerSearchDocs } from './tools/search-docs.js'
 import { registerUpdateSource } from './tools/update-source.js'
+import { registerSearchPackages } from './tools/search-packages.js'
+import { registerGetPackage } from './tools/get-package.js'
 
 async function main() {
   console.error('[sbox-api] Starting S&box API MCP Server...')
@@ -30,6 +32,10 @@ async function main() {
   registerListNamespaces(server, indexes)
   registerSearchDocs(server, indexes)
   registerUpdateSource(server, indexes)
+
+  // UGC Workshop tools (no indexes needed - live API)
+  registerSearchPackages(server)
+  registerGetPackage(server)
 
   // Connect via stdio
   const transport = new StdioServerTransport()
